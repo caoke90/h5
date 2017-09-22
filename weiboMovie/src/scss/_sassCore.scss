@@ -1,0 +1,250 @@
+/**
+ * sass core
+ */
+
+
+/*多行截字*/
+
+@mixin cutword($row: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $row;
+  -webkit-box-orient: vertical;
+}
+
+@mixin imgsize($w,$h){
+	width: $w;
+	height: $h;
+}
+@mixin svgGet($file, $type, $width, $height) {
+  background-image: url($file + '.' + $type);
+  background-size: $width $height;
+}
+
+@mixin dpiGet($value: normal) {
+  @if $value == normal {
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) { @content; }
+  }
+  @else if $value == ip6p {
+    @media (min-device-width:414px) and (max-device-width:736px) and (-webkit-min-device-pixel-ratio:3)   { @content; }
+  }
+  @else if $value == ipad {
+    @media (min-device-width:768px) and (max-device-width:1024px) and (-webkit-min-device-pixel-ratio:2)   { @content; }
+  }
+  @else if $value == low {
+    @media (-webkit-min-device-pixel-ratio: 1), (min-device-pixel-ratio: 1)  { @content; }
+  }
+}
+
+@mixin device($value){
+  @if $value == iPlus {
+    @media screen and (min-width: 414px) and (max-width: 767px){ @content; }
+  }@else if $value == iPad {
+    @media screen and (min-width: 768px){ @content; }
+  }@else if $value == Max {
+    @media screen and (min-width: 769px){ @content; }
+  }
+}
+
+/*基础类在common中*/
+@mixin itembox($height, $line-height,$text-align,$padding,$border-right-gap,$border-bottom-gap,$icon-width,$icon-height,$font-size,$text-margin) {
+  height: $height;
+  line-height: $line-height;
+  text-align: $text-align;
+  padding: $padding;
+  &::before{
+    top: $border-right-gap;
+    bottom: $border-right-gap ;
+  }
+  &::after{
+    left: $border-bottom-gap;
+    right: $border-bottom-gap;
+  }
+  .m-diy-btn{
+    @if $icon-width != 0{
+      img{
+        width: $icon-width;
+        height: $icon-height;
+      }
+    }@else {}
+    h4{
+      font-size: $font-size;
+      margin: $text-margin;
+    }
+  }
+}
+/*处理border*/
+@mixin border($bdv,$w,$s,$c){
+  #{$bdv}: $w $s $c;
+  @at-root .iosx2 &{
+       #{$bdv}: $w/2 $s $c;
+  }
+  @at-root .iosx3 &{
+       #{$bdv}: $w/2.8 $s $c;
+  }
+}
+@mixin fixborder ($w,$h,$c){
+  @if $h == null{
+      width: $w;
+      background-color: $c;
+      @at-root .android &{
+        transform:scale(.5,1);
+      }
+      @at-root .iosx2 &{
+        width: $w/2;
+      }
+      @at-root .iosx3 &{
+        width: $w/2.8;
+      }
+  }@else if $w == null{
+      height: $h;
+      background-color: $c;
+      @at-root .android &{
+        transform:scale(1,.5);
+      }
+      @at-root .iosx2 &{
+        height: $h/2;
+      }
+      @at-root .iosx3 &{
+        height: $h/2.8;
+    }
+  }
+}
+@mixin line($lineTW,$lineRW,$lineBW,$lineLW,$lineC){
+  border-top-width: $lineTW;
+  border-right-width: $lineRW;
+  border-bottom-width: $lineBW;
+  border-left-width: $lineLW;
+  border-color: $lineC;
+  border-style: solid;
+  @at-root .android &{
+    border-top-width: $lineTW;
+    border-right-width: $lineRW;
+    border-bottom-width: $lineBW;
+    border-left-width: $lineLW;
+    border-color: transparent;
+    border-style: solid;
+    border-image: url('data:image/svg+xml;utf-8,%3C?xml%20version=%221.0%22%20encoding=%22utf-8%22?%3E%0A%3C!--%20Generator:%20Adobe%20Illustrator%2016.0.0,%20SVG%20Export%20Plug-In%20.%20SVG%20Version:%206.00%20Build%200)%20%20--%3E%0A%3C!DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0A%3Csvg%20version=%221.1%22%20%20xmlns=%22http://www.w3.org/2000/svg%22%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22%20x=%220px%22%20y=%220px%22%0A%09%20width=%226px%22%20height=%226px%22%20viewBox=%220%200%206%206%22%20enable-background=%22new%200%200%206%206%22%20xml:space=%22preserve%22%3E%0A%3Crect%20x=%220.5%22%20y=%220.5%22%20fill=%22none%22%20stroke=%22#{$lineC}%22%20stroke-miterlimit=%2210%22%20width=%225%22%20height=%225%22/%3E%0A%3C/svg%3E') 2 repeat;
+  }
+  @at-root .iosx2 &{
+    border-image: none;
+    border-top-width: $lineTW/2;
+    border-right-width: $lineRW/2;
+    border-bottom-width: $lineBW/2;
+    border-left-width: $lineLW/2;
+  }
+  @at-root .iosx3 &{
+    border-image: none;
+    border-top-width: $lineTW/2.8;
+    border-right-width: $lineRW/2.8;
+    border-bottom-width: $lineBW/2.8;
+    border-left-width: $lineLW/2.8;
+  }  
+}
+
+// _decimal.scss | MIT License | gist.github.com/terkel/4373420
+
+// Round a number to specified digits.
+//
+// @param  {Number} $number A number to round
+// @param  {Number} [$digits:0] Digits to output
+// @param  {String} [$mode:round] (round|ceil|floor) How to round a number
+// @return {Number} A rounded number
+// @example
+//     decimal-round(0.333)    => 0
+//     decimal-round(0.333, 1) => 0.3
+//     decimal-round(0.333, 2) => 0.33
+//     decimal-round(0.666)    => 1
+//     decimal-round(0.666, 1) => 0.7
+//     decimal-round(0.666, 2) => 0.67
+//
+@function decimal-round ($number, $digits: 0, $mode: round) {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @for $i from 1 through $digits {
+        $n: $n * 10;
+    }
+    @if $mode == round {
+        @return round($number * $n) / $n;
+    } @else if $mode == ceil {
+        @return ceil($number * $n) / $n;
+    } @else if $mode == floor {
+        @return floor($number * $n) / $n;
+    } @else {
+        @warn '#{ $mode } is undefined keyword.';
+        @return $number;
+    }
+}
+
+// Ceil a number to specified digits.
+//
+// @param  {Number} $number A number to round
+// @param  {Number} [$digits:0] Digits to output
+// @return {Number} A ceiled number
+// @example
+//     decimal-ceil(0.333)    => 1
+//     decimal-ceil(0.333, 1) => 0.4
+//     decimal-ceil(0.333, 2) => 0.34
+//     decimal-ceil(0.666)    => 1
+//     decimal-ceil(0.666, 1) => 0.7
+//     decimal-ceil(0.666, 2) => 0.67
+//
+@function decimal-ceil ($number, $digits: 0) {
+    @return decimal-round($number, $digits, ceil);
+}
+
+// Floor a number to specified digits.
+//
+// @param  {Number} $number A number to round
+// @param  {Number} [$digits:0] Digits to output
+// @return {Number} A floored number
+// @example
+//     decimal-floor(0.333)    => 0
+//     decimal-floor(0.333, 1) => 0.3
+//     decimal-floor(0.333, 2) => 0.33
+//     decimal-floor(0.666)    => 0
+//     decimal-floor(0.666, 1) => 0.6
+//     decimal-floor(0.666, 2) => 0.66
+//
+@function decimal-floor ($number, $digits: 0) {
+    @return decimal-round($number, $digits, floor);
+}
+/*单独控制图标的大小*/
+@mixin icsize($vl){
+  font-size: ceil($vl);
+  @include device(iPlus){
+    font-size: ceil($vl*$iPlus);
+  }
+  @include device(iPad){
+    font-size: ceil($vl*$iPad);
+  }
+}
+
+
+@mixin col ($wrapgapV,$wrapgapH,$colgap,$rowgap){  
+    .m-auto-list{
+      margin-left:0 - $colgap / 2;
+      margin-right:0 - $colgap / 2;
+      margin-bottom:0 - $rowgap;
+      padding: $wrapgapV $wrapgapH;
+    }
+    .m-auto-box{
+      padding-left: $colgap / 2;
+      padding-right: $colgap / 2;
+      margin-bottom: $rowgap;
+    }  
+}
+

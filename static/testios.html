@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ios测试</title>
+</head>
+<body>
+<div id="config"></div>
+<div id="city"></div>
+<script>
+    if (window.WeiboJSBridge) {
+        bridgeReady();
+    } else {
+        document.addEventListener('WeiboJSBridgeReady', function () {
+            bridgeReady();
+        });
+    }
+
+    function bridgeReady(){
+        WeiboJSBridge.on('config', function(params){
+            console.log(params)
+            document.querySelector("#config").innerHTML=JSON.stringify(params)
+        });
+        WeiboJSBridge.on('changeCity', function(params){
+            console.log(params)
+            document.querySelector("#city").innerHTML=JSON.stringify(params)
+        });
+    }
+</script>
+</body>
+</html>

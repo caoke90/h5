@@ -1,0 +1,15 @@
+{
+  "name": "cardMaker",
+  "version": "1.0.0",
+  "description": "微博电影运营卡片制作",
+  "author": {
+    "name": "曹科",
+    "email": "caoke@staff.weibo.com"
+  },
+  "private": true,
+  "scripts": {
+    "build": "fis3 release build -d ../../release_h5",
+    "server": "fis3 server start",
+    "release": "fis3 release -wc"
+  }
+}

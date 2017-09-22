@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card7 .card-wrap .card-main { margin: 0; padding-bottom: 0.875rem; }
+
+.card7 header { height: 2.5rem; line-height: 2.5rem; border-top-width: 0; border-right-width: 0; border-bottom-width: 1px; border-left-width: 0; border-color: #e6e6e6; border-style: solid; }
+
+.android .card7 header { border-top-width: 0; border-right-width: 0; border-bottom-width: 1px; border-left-width: 0; border-color: transparent; border-style: solid; border-image: url("data:image/svg+xml;utf-8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%226%22%20height=%226%22%20viewBox=%220%200%206%206%22%3E%3Cpath%20fill=%22none%22%20stroke=%22silver%22%20stroke-width=%22.5%22%20stroke-miterlimit=%2210%22%20d=%22M.3.3h5.5v5.5H.3z%22/%3E%3C/svg%3E") 2 repeat; }
+
+.iosx2 .card7 header { border-image: none; border-top-width: 0; border-right-width: 0; border-bottom-width: 0.5px; border-left-width: 0; }
+
+.iosx3 .card7 header { border-image: none; border-top-width: 0; border-right-width: 0; border-bottom-width: 0.35714px; border-left-width: 0; }
+
+.card7 header h2 { font-size: 1.0625rem; color: #333; }
+
+.card7 article { color: #333; font-size: 0.9375rem; line-height: 1.25rem; padding: 0.875rem 0 0 0; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+.card7 article .card-more { color: #507DAF; }
+
+.card7 article .card-more:before { content: "…"; color: #333; }
+
+.card7 footer { margin-top: 0.625rem; color: #939393; font-size: 0.75rem; }

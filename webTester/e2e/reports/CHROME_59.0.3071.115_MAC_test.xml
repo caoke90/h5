@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="1">
+
+  <testsuite name="test"
+    errors="1" failures="0" hostname="" id="" package="test" skipped="0"
+    tests="1" time="23.61" timestamp="Mon, 07 Aug 2017 09:31:52 GMT">
+  
+    <testcase name="qq" classname="test" time="23.61" assertions="0">
+    </testcase>
+  
+
+  
+    <system-err>
+      ERROR: Unable to locate element: &quot;#\24 1_substitutor_content&quot; using: css selector
+    at Object.qq (/Users/caoke/sinaApp/h5/test/e2e/specs/test.js:111:13)
+    at Module.call (/Users/caoke/sinaApp/h5/node_modules/nightwatch/lib/runner/module.js:62:34)
+    at /Users/caoke/sinaApp/h5/node_modules/nightwatch/lib/runner/testcase.js:70:29
+    at _fulfilled (/Users/caoke/sinaApp/h5/node_modules/nightwatch/node_modules/q/q.js:834:54)
+    at self.promiseDispatch.done (/Users/caoke/sinaApp/h5/node_modules/nightwatch/node_modules/q/q.js:863:30)
+    at Promise.promise.promiseDispatch (/Users/caoke/sinaApp/h5/node_modules/nightwatch/node_modules/q/q.js:796:13)
+    at /Users/caoke/sinaApp/h5/node_modules/nightwatch/node_modules/q/q.js:556:49
+    at runSingle (/Users/caoke/sinaApp/h5/node_modules/nightwatch/node_modules/q/q.js:137:13)
+    at flush (/Users/caoke/sinaApp/h5/node_modules/nightwatch/node_modules/q/q.js:125:13)
+    at _combinedTickCallback (internal/process/next_tick.js:95:7)
+    </system-err>
+  
+
+  
+  </testsuite>
+</testsuites>

@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo-card运营页面</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <script src="commonPro.js"></script>
+</head>
+
+<body>
+<div id="app" style="margin: 0 auto;max-width: 768px;position: relative;"></div>
+</body>
+
+<script>
+  var datastr=localStorage.getItem("curCardData")||"[]"
+  render(JSON.parse(datastr),document.querySelector("#app"))
+</script>
+</html>

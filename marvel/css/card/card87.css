@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card87 { width: 10rem; height: 5rem; }
+
+.card87 .m-img-box { height: 100%; position: relative; }
+
+.card87 .m-btn-media { position: absolute; z-index: 9; left: 50%; top: 50%; margin-top: -0.3125rem; transform: translate(-50%, -50%); }
+
+.card87 .text-bar { position: absolute; bottom: 0; left: 0; right: 0; font-size: 0.75rem; color: #FFF; background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.58) 100%); }
+
+.card87 .text-bar span { display: block; box-sizing: border-box; padding: 0.1875rem 0.3125rem; }

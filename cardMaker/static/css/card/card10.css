@@ -1,0 +1,80 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card10 .card-wrap .card-main { margin: 0; }
+
+.card10 a { color: #507DAF; }
+
+.card10 article { font-size: 1rem; line-height: 1.5; }
+
+.card10 article .m-auto-list { margin-left: -0.21875rem; margin-right: -0.21875rem; margin-bottom: 0; padding: 0 0; }
+
+.card10 article .m-auto-box { padding-left: 0.21875rem; padding-right: 0.21875rem; margin-bottom: 0; }
+
+.card10 article section { margin: 0.625rem 0; }
+
+.card10 .media-box .m-btn-media { position: absolute; z-index: 9; font-size: 4.2rem; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+.card10 .media-box .media-msg { position: absolute; left: 0px; bottom: 0.5625rem; width: 100%; color: #FFF; display: flex; margin: 0 0.8125rem; font-size: 0.8125rem; justify-content: space-between; }
+
+.card10 .video-share { box-sizing: border-box; width: 100%; height: 30px; padding: 15px 0.75rem 0px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+
+.card10 .video-share div { display: inline-block; position: relative; }
+
+.card10 .video-share .left { display: flex; justify-content: flex-start; align-items: center; }
+
+.card10 .video-share .left p { margin-right: 10px; position: relative; }
+
+.card10 .video-share .left p i { position: absolute; right: 0px; bottom: 0px; width: 10px; height: 10px; background: red; }
+
+.card10 .video-share .left img { width: 30px; height: 30px; border-radius: 50%; }
+
+.card10 .video-share .left span { vertical-align: middle; font-size: 13px; color: #939393; }
+
+.card10 .video-share .right div + div { margin-left: 20px; }
+
+.card10 .video-share .right span { vertical-align: middle; font-size: 13px; color: #939393; }
+
+.card10 .video-share .right span.rt { width: 20px; height: 20px; display: inline-block; }
+
+.card10 .video-share .right span.fwd { background: url(../../assets/img/msg.svg) no-repeat center; background-size: 18px; }
+
+.card10 .video-share .right span.msg { background: url(../../assets/img/share.svg) no-repeat center; background-size: 18px; }
+
+.card10 .video-share .right span.shr { background: url(../../assets/img/good.svg) no-repeat center; background-size: 18px; }
+
+.card10 .video-share .right p.msg-num { position: absolute; color: #fff; border-radius: 50%; top: -5px; right: -5px; font-size: 3px; width: 16px; height: 16px; background: red; line-height: 16px; text-align: center; transform: scale(0.8); }

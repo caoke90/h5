@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>config接口测试</title>
+</head>
+<body>
+如果能接受到数据,依次弹出<br>
+<p style="color: red;">
+    android：<br>
+    android ready ok<br>
+    android config ok<br>
+</p>
+<p style="color: blue;">
+ios：<br>
+ios ready ok<br>
+ios config ok<br>
+</p>
+</body>
+<script>
+    //android测试
+    function connectWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) {
+            callback(WebViewJavascriptBridge)
+        } else {
+            document.addEventListener(
+                'WebViewJavascriptBridgeReady'
+                , function() {
+                    callback(WebViewJavascriptBridge)
+                },
+                false
+            );
+        }
+    }
+
+    connectWebViewJavascriptBridge(function(bridge) {
+        alert("android ready ok")
+        bridge.registerHandler("config", function(params, responseCallback) {
+            alert("android config ok")
+            alert(params)
+        });
+        bridge.registerHandler("changeCity", function(params, responseCallback) {
+            alert("ios changeCity ok")
+            alert(params)
+        });
+    })
+    //ios测试
+    function bridgeReady () {
+        alert("ios ready ok")
+        WeiboJSBridge.on('config', function(params){
+            alert("ios config ok")
+            alert(params)
+        });
+        WeiboJSBridge.on('changeCity', function(params){
+            alert("ios changeCity ok")
+            alert(params)
+        });
+    }
+
+    if (window.WeiboJSBridge) {
+        bridgeReady();
+    } else {
+        document.addEventListener('WeiboJSBridgeReady', function () {
+            bridgeReady();
+        });
+    }
+</script>
+</html>

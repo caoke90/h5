@@ -1,0 +1,100 @@
+/**
+ * var 
+ */
+ /*Background color*/
+$baseBgColor : #f2f2f2;
+/*Font icon color*/
+$baseFontIconColor : #aeaeae;
+/*card background*/
+$card-bg : #fff;
+/*Font Name*/
+$font-family-name:"marvelfont";
+/*Font Path*/
+$font-file-path: "../../font/marvelfont";
+/*Font Class Prefix*/
+$front-icon-font : "m-font" ;
+/*Image Icon Prefix*/
+$imageIcon:"m-icon";
+/*Image Icon Path*/
+$imageIconPath:"../../img/sprite" ;
+/*Button Prefix*/
+$button:"m-btn";
+/*Animation Prefix*/
+$an-name:"m-an";
+/*Border Color*/
+$bd-cl : #e6e6e6;
+/*bar background color*/
+$bb-bg : #f9f9f9;
+/*line box background color*/
+$lb-bg : #f9f9f9;
+/*tap topbar bg*/
+$tp-bg : #f5f5f5;
+/*Popup background*/
+$pp-bg : rgba(black,0.6);
+/*Dialog background*/
+$dl-bg :#f8f8f8;
+/*Pop s background*/
+$pop-s-bg : #fff;
+/**/
+$pop-s-line : #e6e6e6; 
+/*Pop s border*/
+$pop-s-bd : #a6a6a6;
+/*Pop lt background*/
+$pop-lt-bg : #f8f8f8;
+/*Pop lt line color*/
+$pop-lt-line : #f2f2f2;
+/*Avatar Line Color*/
+$avt-cl : rgba(black,0.05);
+/*Bubble Color*/
+$bred : #ff5b36;
+/*Rank Star Color*/
+$star-base : #b8b8b8;
+$star-check : #fcce17;
+/*Colors*/
+$cl-a : #333;
+$cl-b : #636363;
+$cl-c : #939393;
+$cl-l : #507DAF;
+$cl-y : #FF8200;
+$cl-r : #e14123;
+$cl-o : #F46200;
+$cl-w : #FFF;
+$cl-g : #10B524;
+
+
+
+
+
+
+
+
+/*font*/
+$baseFontSize:16px !default;
+@function P2R($px) {
+  @return $px / $baseFontSize * 1rem;
+}
+@function P2M($px) {
+  @return $px / $baseFontSize * 1em;
+}
+/*Font Size*/
+$f9  : P2R(9px);
+$f10 : P2R(10px);
+$f11 : P2R(11px);
+$f12 : P2R(12px);
+$f13 : P2R(13px);
+$f14 : P2R(14px);
+$f15 : P2R(15px);
+$f16 : P2R(16px);
+$f17 : P2R(17px);
+$f18 : P2R(18px);
+$f24 : P2R(24px);
+
+
+
+/*card gap*/
+$gap : P2R(12px);
+
+
+/*devices*/
+$iPlus : 1.06;
+$iPad : 1.25;

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card4 .card-wrap { height: 2.75rem; }
+
+.card4 .card-wrap .card-main { margin: 0; }
+
+.card4 .m-img-icon { flex-shrink: 0; }
+
+.card4 .box-left { font-size: 0; min-width: 0; }
+
+.card4 .box-left .main-link { font-size: 1rem; color: #333; min-width: 0; }
+
+.card4 .box-left .main-link .main-text { min-width: 0; display: block; /*处理低版本安卓4.x不截字的问题*/ max-width: 10rem; max-width: 100vw; }
+
+.card4 .box-left .main-link .sub-text { font-size: 0.75rem; color: #939393; margin-left: 0.25rem; flex-shrink: 0; }
+
+.card4 .img-icon-b { margin-right: 0; }
+
+.card4 .m-link-icon { margin-left: 0.5rem; height: auto; flex-shrink: 0; }
+
+.card4 .m-link-icon img { height: auto; }
+
+.card4 .m-bubble-red-s { flex-shrink: 0; margin-left: 0.5rem; }

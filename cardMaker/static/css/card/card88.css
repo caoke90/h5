@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card88 .m-auto-list { margin-left: -0.25rem; margin-right: -0.25rem; margin-bottom: -0.625rem; padding: 0 0; }
+
+.card88 .m-auto-box { padding-left: 0.25rem; padding-right: 0.25rem; margin-bottom: 0.625rem; }
+
+.card88 .m-auto-box .m-panel { border: 0; }
+
+.card88 .m-auto-box .m-btn-media { position: absolute; z-index: 9; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 4.4rem; }
+
+.card88 .m-auto-box .live-intro { position: absolute; left: 0.75rem; top: 0.625rem; z-index: 99; padding: 0.125rem; background: rgba(0, 0, 0, 0.4); border-radius: 1rem; color: #FFF; }
+
+.card88 .m-auto-box .live-intro .live-tag { display: inline-block; width: 1.5rem; height: 1.5rem; line-height: 1.5rem; vertical-align: middle; border-radius: 50%; font-size: 0.5rem; color: #FFF; text-align: center; background: rgba(229, 42, 42, 0.8); }
+
+.card88 .m-auto-box .live-intro .live-data { display: inline-block; vertical-align: middle; padding: 0 0.3125rem; }
+
+.card88 .m-auto-box .live-intro .live-num { font-size: 0.5rem; margin-bottom: 0.25rem; }
+
+.card88 .m-auto-box .live-intro .live-time { font-size: 0.4375rem; }
+
+.card88 .m-auto-box article { padding-bottom: 0.625rem; }
+
+.card88 .m-auto-box article > .m-img-box { position: relative; margin-bottom: 1.25rem; }
+
+.card88 .m-auto-box article .m-avatar-box { position: absolute; z-index: 9; bottom: -1.3125rem; left: 0.5625rem; right: 0; }
+
+.card88 .m-auto-box article .m-avatar-box .m-img-box { width: 1.875rem; height: 1.875rem; border: 2px solid #FFF; }
+
+.card88 .m-auto-box article .m-avatar-box .m-text-box { margin-left: 0.5625rem; margin-top: 0.75rem; }
+
+.card88 .m-auto-box article .m-avatar-box .m-text-box h3 { color: #636363; font-size: 0.875rem; }
+
+.card88 .m-auto-box article .m-avatar-box .m-icon { font-size: 10px; }
+
+@media screen and (min-width: 414px) and (max-width: 767px) { .card88 .m-auto-box article .m-avatar-box .m-icon { font-size: 11px; } }
+
+@media screen and (min-width: 768px) { .card88 .m-auto-box article .m-avatar-box .m-icon { font-size: 13px; } }
+
+.card88 .m-auto-box article > .m-text-box { padding: 0.5rem 0.5625rem; }
+
+.card88 .m-auto-box article > .m-text-box h3 { font-size: 0.9375rem; line-height: 1.2; height: 2.125rem; }
+
+.card88 .m-auto-box article > .m-text-box h4 { bottom: 0.5rem; }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>android测试</title>
+</head>
+<body>
+<div id="config"></div>
+<div id="city"></div>
+<p>
+    <input type="text" id="text1" value="调用安卓Toast方法"/>
+</p>
+<p>
+    <input type="button" id="enter" value="调用安卓的方法" onclick="testClick();"
+    />
+</p>
+<script>
+    function testClick() {
+        var data = document.getElementById("text1").value;
+        //����java�еķ���   submitFromWeb�Ƿ�����
+        window.WebViewJavascriptBridge.callHandler(
+            'submitFromWeb'
+            , {'param': data}
+            , function(responseData) {
+                alert(responseData)
+            }
+        );
+    }
+    document.querySelector("#config").innerHTML="init";
+    function connectWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) {
+            callback(WebViewJavascriptBridge)
+        } else {
+            document.addEventListener(
+                'WebViewJavascriptBridgeReady'
+                , function() {
+                    callback(WebViewJavascriptBridge)
+                },
+                false
+            );
+        }
+    }
+
+    connectWebViewJavascriptBridge(function(bridge) {
+        document.querySelector("#config").innerHTML="ready";
+        bridge.registerHandler("movieConfig", function(data, responseCallback) {
+            alert("movieConfig")
+            console.log(data)
+            document.querySelector("#config").innerHTML=JSON.stringify(data)
+        });
+        bridge.registerHandler("changeCity", function(data, responseCallback) {
+            alert("changeCity")
+            console.log(data)
+            document.querySelector("#city").innerHTML=JSON.stringify(data)
+        });
+    })
+</script>
+</body>
+</html>

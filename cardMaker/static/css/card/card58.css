@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card58 fieldset { border-top-width: 1px; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-color: #e6e6e6; border-style: solid; text-align: center; font-size: 0.75rem; }
+
+.android .card58 fieldset { border-top-width: 1px; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-color: transparent; border-style: solid; border-image: url("data:image/svg+xml;utf-8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%226%22%20height=%226%22%20viewBox=%220%200%206%206%22%3E%3Cpath%20fill=%22none%22%20stroke=%22silver%22%20stroke-width=%22.5%22%20stroke-miterlimit=%2210%22%20d=%22M.3.3h5.5v5.5H.3z%22/%3E%3C/svg%3E") 2 repeat; }
+
+.iosx2 .card58 fieldset { border-image: none; border-top-width: 0.5px; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; }
+
+.iosx3 .card58 fieldset { border-image: none; border-top-width: 0.35714px; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; }
+
+.card58 legend { padding: 0 1.25rem; }

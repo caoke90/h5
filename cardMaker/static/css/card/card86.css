@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/** sass core */
+/*多行截字*/
+/*基础类在common中*/
+/*处理border*/
+/*单独控制图标的大小*/
+/** var */
+/*Background color*/
+/*Font icon color*/
+/*card background*/
+/*Font Name*/
+/*Font Path*/
+/*Font Class Prefix*/
+/*Image Icon Prefix*/
+/*Image Icon Path*/
+/*Button Prefix*/
+/*Animation Prefix*/
+/*Border Color*/
+/*bar background color*/
+/*line box background color*/
+/*tap topbar bg*/
+/*Popup background*/
+/*Dialog background*/
+/*Pop s background*/
+/**/
+/*Pop s border*/
+/*Pop lt background*/
+/*Pop lt line color*/
+/*Avatar Line Color*/
+/*Bubble Color*/
+/*Rank Star Color*/
+/*Colors*/
+/*font*/
+/*Font Size*/
+/*层优先级*/
+/*card gap*/
+/*devices*/
+.card86 > .card-wrap > .card-main { padding: 0.625rem 0; }
+
+.card86 .item-list { font-size: 0; margin-left: 0.75rem; white-space: nowrap; overflow: auto; -webkit-overflow-scrolling: touch; }
+
+.card86 .item-list::-webkit-scrollbar { display: none; }
+
+.card86 .item-list .card { margin: 0; }
+
+.card86 .item-list li { display: inline-block; vertical-align: top; margin-right: 0.3125rem; }

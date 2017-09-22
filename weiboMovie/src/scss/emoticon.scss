@@ -1,0 +1,39 @@
+.face.face_1 {
+  background-image: url(//h5.sinaimg.cn/weibocn/v6/img/face/face-1_2x.d089f154.png);
+}
+
+.face.face_2 {
+  background-image: url(//h5.sinaimg.cn/weibocn/v6/img/face/face-2_2x.da6893b5.png);
+}
+
+.face.face_3 {
+  background-image: url(//h5.sinaimg.cn/weibocn/v6/img/face/face-3_2x.7374abf2.png);
+}
+
+.face.face_4 {
+  background-image: url(//h5.sinaimg.cn/weibocn/v6/img/face/face-4_2x.bf26c359.png);
+}
+
+@mixin emoticon($size: 1) {
+  .face {
+    margin: 4px 0;
+    width: $size * 1rem;
+    height: $size * 1rem;
+    background-repeat: no-repeat;
+    -webkit-background-size: $size 1rem auto;
+    background-size: $size * 1rem auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-indent: -9999px;
+    vertical-align: top;
+    display: inline-block;
+    @for $i from 0 through 27 {
+      &.icon_#{$i} {
+        background-position: 50% $size * $i * -1rem
+      }
+    }
+  }
+}
+
+@include emoticon(1);

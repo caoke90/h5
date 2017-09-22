@@ -1,0 +1,67 @@
+<html>
+        <head>
+                <meta content="text/html; charset=utf-8" http-equiv="content-type">
+                <title>js调用java</title>
+        </head>
+        <body>
+        <p>
+            <input type="text" id="text1" value="调用安卓Toast方法"/>
+        </p>
+        <p>
+            <input type="button" id="enter" value="调用安卓的方法" onclick="testClick();"
+            />
+        </p>
+
+        <script>
+
+            //������Ϣ����׿
+         function testClick() {
+           var data = document.getElementById("text1").value;
+          //����java�еķ���   submitFromWeb�Ƿ�����
+            window.WebViewJavascriptBridge.callHandler(
+               'submitFromWeb'
+               , {'param': data}
+               , function(responseData) {
+                    alert(responseData)
+               }
+           );
+       }
+
+       //ע���¼�����
+       function connectWebViewJavascriptBridge(callback) {
+           if (window.WebViewJavascriptBridge) {
+               callback(WebViewJavascriptBridge)
+           } else {
+               document.addEventListener(
+                   'WebViewJavascriptBridgeReady'
+                   , function() {
+                       callback(WebViewJavascriptBridge)
+                   },
+                   false
+               );
+           }
+       }
+
+        //ע��ص���������һ������ʱ���� ��ʼ������
+       connectWebViewJavascriptBridge(function(bridge) {
+           alert("ready")
+            //��ʼ��
+           bridge.init(function(message, responseCallback) {
+               var data = {
+                   'Javascript Responds': 'Wee!'
+               };
+               responseCallback(data);
+           });
+
+            //���հ�׿��������Ϣ   �����ظ���׿֪ͨ
+           bridge.registerHandler("functionInJs", function(data, responseCallback) {
+                alert(data);
+               var responseData = "我接收到了android的调用";
+               responseCallback(responseData);
+           });
+       })
+
+    </script>
+
+        </body>
+</html>

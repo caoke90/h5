@@ -1,0 +1,773 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>卡片制作器</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+  <link rel="stylesheet" href="../static/mint-ui.css" />
+
+  <script src="../static/zepto.min.js"></script>
+  <script src="../static/vue.js"></script>
+  <script src="../static/mint-ui.js"></script>
+
+  <style>
+    body,div,p{
+      margin: 0;padding: 0;
+    }
+    body{
+
+      background: #f2f2f2;
+    }
+    #app{
+      display: flex;
+      justify-content:space-between;
+    }
+    .del{
+      position: absolute;
+      width: 100px;
+      left: 375px;
+      top:0;
+      z-index: 1000;
+    }
+    .left{
+      position: relative;
+      width: 375px;
+    }
+    .main{
+      width: 375px;
+      height: 100vh;
+      background: #fff;
+      /*overflow-x: visible;*/
+      /*overflow-y: scroll;*/
+      position: relative;
+    }
+    .right{
+      width: 320px;
+    }
+    .right .mint-field-core{
+      color: #0bb20c;
+    }
+    .right .mint-field-core::placeholder{
+      color: #0bb20c;
+      opacity: 0.4;
+    }
+    .right .objItem{
+      padding-left: 20px;
+    }
+    .right .objArr{
+      display: flex;
+    }
+    .right .arrIndex{
+      width: 20px;
+      line-height: 50px;
+
+    }
+    .right .objArrItem{
+      flex:1;
+    }
+    .right .mint-cell-value a{
+      cursor: pointer;
+      color: #26a2ff;
+    }
+    .left .itemCard{
+      position: relative;
+    }
+    .left .numCard{
+      background: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      line-height: 24px;
+      text-align: center;
+      position: absolute;
+      left: 0px;
+      top:0;
+      z-index: 2;
+    }
+    .main .itemCard{
+      position: relative;
+
+    }
+    .main .numCard{
+      background: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      line-height: 24px;
+      text-align: center;
+      position: absolute;
+      right: -30px;
+      top:0;
+      z-index: 2;
+    }
+  </style>
+</head>
+
+<body>
+<div id="app" @mouseup="mouseup" @touchend="mouseup">
+  <div class="left" id="left">
+      <div style="position: fixed;width: 375px;">
+        <mt-navbar v-model="selected2">
+          <mt-tab-item v-for="(v,k) in childrenList" :id="'l'+k" :key="'l'+k">{{v.title}}</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container style="overflow-y: scroll;height:90vh;" v-model="selected2">
+          <mt-tab-container-item v-for="(item,k) in childrenList" :id="'l'+k" :key="'l'+k">
+            <div v-for="(v,k) in item.children" :key="v.cardId">
+              <card v-bind:user-data="v" :k="k" contain="children"></card>
+            </div>
+          </mt-tab-container-item>
+        </mt-tab-container>
+      </div>
+  </div>
+  <div style="position: relative;" id="main">
+    <div class="del" v-show="editCardData">
+      <mt-button style="margin-left: 10px;" type="danger" size="small" v-on:click="del"><-删除</mt-button>
+    </div>
+
+    <div class="main">
+      <div v-for="(v,k) in mainChild" :key="v.cardId">
+        <card v-bind:user-data="v" :style="v.styleObj" :k="k" contain="mainChild"></card>
+      </div>
+    </div>
+  </div>
+
+  <div class="right" id="right">
+    <div style="position:fixed;width: 320px;z-index: 20;height: 100vh;overflow-y: scroll;">
+      <div style="margin-bottom: 10px;">
+        <mt-button size="small" style="cursor: pointer" v-on:click="show">预览</mt-button>
+        <mt-button size="small" style="cursor: pointer" v-on:click="save">保存</mt-button>
+      </div>
+      <div v-if="editCardData">
+        <mt-navbar v-model="selected">
+          <mt-tab-item id="e1">数据</mt-tab-item>
+          <mt-tab-item id="e2">卡片信息</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container v-model="selected">
+          <mt-tab-container-item id="e1">
+            <div v-if="editCardData.isPendant" style="padding:5px 10px;">
+
+              <mt-field label="width:" placeholder="请输入" v-on:change="changev2($event,'width')" :value="editCardData.styleObj.width"></mt-field>
+              <mt-field label="height:" placeholder="请输入" v-on:change="changev2($event,'height')" :value="editCardData.styleObj.height"></mt-field>
+              <mt-field label="z-index:" type="number" placeholder="请输入" v-on:change="changev2($event,'z-index')" :value="editCardData.styleObj['z-index']"></mt-field>
+              <!--<div v-for="(v,k) in editCardData.styleObj">-->
+                <!--<mt-field :label="k+':'" placeholder="请输入" v-on:change="changev2($event,k)" :value="v"></mt-field>-->
+              <!--</div>-->
+            </div>
+            <div v-if="Object.prototype.toString.call(editCardData.cardData)=='[object Object]'">
+              <div v-for="(v,k) in editCardData.cardData" >
+                <div v-if="Object.prototype.toString.call(v)=='[object Object]'">
+                  <div v-on:click="selected3==k?selected3='':selected3=k">
+                    <mt-cell :title="k+':'">
+                      <a v-if="selected3!=k">{…}</a>
+                      <a v-else>-</a>
+                    </mt-cell>
+                  </div>
+                  <div v-show="selected3==k">
+                    <div>{</div>
+                    <div v-for="(v2,k2) in v" class="objItem">
+                      <mt-field v-on:change="changev($event,k,k2)" :label="k2+':'" placeholder="请输入" :value="v2"></mt-field>
+                    </div>
+                    <div>}</div>
+                  </div>
+                </div>
+                <div v-else-if="Object.prototype.toString.call(v)=='[object Array]'">
+                  <div v-if="v[0]&&Object.prototype.toString.call(v[0])=='[object Object]'" v-on:click="selected3==k?selected3='':selected3=k">
+                    <mt-cell :title="k+':'">
+                      <a v-if="selected3!=k">{{'['+'{…},'.repeat(v.length).replace(/,$/,'')+v.length+']'}}</a>
+                      <a v-else>-</a>
+                    </mt-cell>
+                  </div>
+                  <div v-else v-on:click="selected3==k?selected3='':selected3=k">
+                    <mt-cell :title="k+':'">
+                      <a v-if="selected3!=k">{{'[…'+v.length+']'}}</a>
+                      <a v-else>-</a>
+                    </mt-cell>
+                  </div>
+                  <div v-show="selected3==k">
+
+                    <div v-for="(v2,k2) in v" class="objArr">
+                      <div class="arrIndex">{{k2}}</div>
+                      <div class="objArrItem" v-if="Object.prototype.toString.call(v2)=='[object Object]'">
+                        <mt-field v-for="(v3,k3) in v2" v-on:change="changev($event,k,k2,k3)" placeholder="请输入" :label="k3+':'" :value="v3"></mt-field>
+                      </div>
+                      <div class="objArrItem" v-else>
+                        <mt-field placeholder="请输入" v-on:change="changev($event,k,k2)" :value="v2"></mt-field>
+                      </div>
+                      <div><mt-button size="small" style="cursor: pointer" v-on:click="delv(k,k2)">删除</mt-button></div>
+                    </div>
+                    <div><mt-button size="small" style="cursor: pointer" v-on:click="addv(k)">添加</mt-button></div>
+                  </div>
+                </div>
+                <div v-else >
+                  <mt-field :label="k+':'" placeholder="请输入" v-on:change="changev($event,k)" :value="v"></mt-field>
+                </div>
+              </div>
+            </div>
+            <div v-else-if="Object.prototype.toString.call(editCardData.cardData)=='[object Array]'">
+              <div v-for="(v,k) in editCardData.cardData" class="objArr">
+                <div class="arrIndex">{{k}}</div>
+                <div class="objArrItem" v-if="Object.prototype.toString.call(v)=='[object Object]'">
+                  <mt-field v-for="(v2,k2) in v" v-on:change="changev($event,k,k2)" placeholder="请输入" :label="k2+':'" :value="v2"></mt-field>
+                </div>
+                <div class="objArrItem" v-else>
+                  <mt-field placeholder="请输入" v-on:change="changev($event,k)" :value="v"></mt-field>
+                </div>
+                <div><mt-button size="small" style="cursor: pointer" v-on:click="delv(k)">删除</mt-button></div>
+              </div>
+              <div><mt-button size="small" style="cursor: pointer" v-on:click="addv()">添加</mt-button></div>
+            </div>
+            <div v-else></div>
+          </mt-tab-container-item>
+          <mt-tab-container-item id="e2">
+
+
+            <mt-cell
+              title="id"
+              :value="editCardData.cardId">
+            </mt-cell>
+            <mt-cell
+              title="卡片类型"
+              :value="editCardData.cardName">
+            </mt-cell>
+          </mt-tab-container-item>
+        </mt-tab-container>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+
+<script>
+  var data={
+  }
+  bus=$(window)
+  bus.curCardData=null;
+  bus.contain="";
+  bus.index=0;
+
+  bus.editCardData=null
+  bus.editcontain="";
+
+  Vue.component('card', {
+    template: '<div class="itemCard" v-on:click="mouseenter" @touchstart="mousedown" @touchend="mouseup" @mousedown="mousedown" @mouseup="mouseup" draggable="true"><div class="numCard">{{k}}</div></div>',
+    props:["userData","contain","k"],
+    data:function () {
+      return {
+      };
+    },
+    methods:{
+      mouseenter:function (e) {
+        if(this.contain=="mainChild"){
+          bus.editCardData=this.userData
+          bus.editcontain=this.contain
+          bus.trigger("edit")
+        }
+      },
+      mousedown:function (e) {
+        bus.curCardData=this.userData
+        bus.contain=this.contain
+        if(bus.curCardData.isPendant){
+          bus.e=e;
+        }
+      },
+      mouseup:function (e) {
+        if(bus.curCardData){
+          var curCardData=bus.curCardData
+          //挂件移动
+          if(curCardData.isPendant){
+            return;
+          }
+          bus.curCardData=null
+          //移动
+          if(bus.contain=="mainChild"&&this.contain=="mainChild"){
+            if(this.userData.isPendant){
+              return;
+            }
+            var curIndex=this.$parent.mainChild.indexOf(this.userData)
+            var preIndex=this.$parent.mainChild.indexOf(curCardData)
+            //交换
+            if(preIndex-curIndex==1){
+              this.$parent.mainChild.splice(curIndex,1)
+              this.$parent.mainChild.splice(curIndex+1,0,this.userData)
+            }else if(preIndex!=curIndex){
+              //移动
+              this.$parent.mainChild.splice(preIndex,1)
+              curIndex=this.$parent.mainChild.indexOf(this.userData)
+              this.$parent.mainChild.splice(curIndex+1,0,curCardData)
+            }
+          }
+          if(bus.contain=="children"&&this.contain=="mainChild"){//插入
+            var curIndex=this.$parent.mainChild.indexOf(this.userData)
+            var preIndex=this.$parent.mainChild.indexOf(curCardData)
+            var obj=JSON.parse(JSON.stringify(curCardData))
+            obj.cardId=obj.cardName+(bus.index++)
+            console.log(obj.cardId)
+            this.$parent.mainChild.splice(curIndex+1,0,obj)
+          }
+        }
+      }
+    },
+    mounted:function () {
+      var obj=this.userData
+      if(!obj.isPendant){
+        obj.isPendant=false;
+        obj.styleObj={}
+      }
+      var data=JSON.parse(JSON.stringify(obj))
+      delete data.cssText
+      render([data],this.$el,function () {
+        //获取card的默认数据
+        if(!obj.cardData){
+          obj.cardData=JSON.parse(JSON.stringify(define(obj.cardName).cardData))
+        }
+      })
+    }
+
+  })
+
+  var app=new Vue({
+    el:"#app",
+    data:{
+      selected:"e1",////右边
+      selected2:"l0",//左边
+      selected3:"",//右边
+      childrenList:[],
+      mainChild:[],
+      editCardData:bus.editCardData
+    },
+    methods:{
+      //卡片拖到中间
+      mouseup:function (e) {
+
+        if(bus.curCardData){
+          var curCardData=bus.curCardData
+          bus.curCardData=null
+
+          if(bus.contain=="mainChild"&&curCardData.isPendant){
+            var dx=e.x-bus.e.x
+            var dy=e.y-bus.e.y
+            curCardData.styleObj.left=parseInt(curCardData.styleObj.left)+dx+"px"
+            curCardData.styleObj.top=parseInt(curCardData.styleObj.top)+dy+"px"
+            this.$nextTick(function(){
+              var id=curCardData.cardId
+              var po=$("#"+id).offset()
+              if(po){
+                $(".del").css({
+                  top:(po.top+50)+"px"
+                })
+              }
+            })
+            return
+          }
+          var preIndex=this.mainChild.indexOf(curCardData)
+          //添加新的卡片
+          if(bus.contain=="children"){
+            var obj=JSON.parse(JSON.stringify(curCardData))
+            console.log(obj)
+            obj.cardId=obj.cardName+(bus.index++)
+            //添加挂件
+            if(obj.isPendant){
+              obj.styleObj={
+                position:"absolute",
+                top:"0px",
+                left:"0px",
+                width:"100%",
+                height:"auto",
+                "z-index":"10",
+              }
+            }
+
+            this.mainChild.push(obj)
+          }
+          if(bus.contain=="mainChild"&&preIndex!=this.mainChild.length-1){
+            this.mainChild.splice(preIndex,1)
+            this.mainChild.push(curCardData)
+          }
+        }
+      },
+      //点击删除
+      del:function () {
+        var the=this
+        the.mainChild.splice(the.mainChild.indexOf(the.editCardData),1)
+        the.editCardData=null
+      },
+      //点击预览
+      show:function () {
+        window.open("demo.html")
+      },
+      //点击保存
+      save:function () {
+        var obj=JSON.parse(JSON.stringify(this.mainChild))
+        var time=new Date().getTime().toString().substr(5,8)
+        obj.map(function (item,k) {
+          item.cardId="t"+time+k
+          if(item.isPendant){
+            var cssText="";
+            for(var k in item.styleObj){
+              cssText=cssText+k+":"+item.styleObj[k]+";";
+            }
+            item.cssText=cssText;
+          }
+          delete item.isPendant;
+          delete item.styleObj;
+          return item
+        })
+        console.log(obj)
+        localStorage.setItem("curCardData",JSON.stringify(obj))
+        this.$toast({
+          message: '已保存！'
+        })
+      },
+      //右边编辑变化
+      changev:function (v,k,k2,k3) {
+        var obj=this.editCardData;
+        obj.cardId=obj.cardName+(bus.index++);
+        if(arguments.length==2){
+          obj.cardData[k]=v;
+        }else if(arguments.length==3){
+          obj.cardData[k][k2]=v;
+        }else if(arguments.length==4){
+          obj.cardData[k][k2][k3]=v;
+        }
+      },
+      //删除一个数组
+      delv:function (k,k2) {
+        var obj=this.editCardData;
+        obj.cardId=obj.cardName+(bus.index++)
+        if(arguments.length==2){
+          obj.cardData[k].splice(k2,1)
+        }
+        if(arguments.length==1){
+          obj.cardData.splice(k,1)
+        }
+      },
+      //添加一个
+      addv:function (k) {
+        var obj=this.editCardData;
+
+        if(arguments.length==1){
+          var arr=define(obj.cardName).cardData[k]
+          if(arr[0]&&typeof arr[0]=="object"){
+            var item={}
+            for(var k3 in arr[0]){
+              item[k3]=""
+            }
+            obj.cardData[k].push(item)
+          }else{
+            obj.cardData[k].push("")
+          }
+        }
+        if(arguments.length==0){
+          var arr=define(obj.cardName).cardData
+          if(arr[0]&&typeof arr[0]=="object"){
+            var item={}
+            for(var k3 in arr[0]){
+              item[k3]=""
+            }
+            obj.cardData.push(item)
+          }else{
+            obj.cardData.push("")
+          }
+        }
+      },
+      changev2:function (v,k) {
+        var obj=this.editCardData
+        obj.styleObj[k]=v;
+        obj.cardId=obj.cardName+(bus.index++)
+      },
+      //挂件改变
+      isPendantchange:function () {
+        var obj=this.editCardData
+        if(obj.isPendant){
+          if(JSON.stringify(obj.styleObj)=="{}"){
+            obj.styleObj={
+              position:"absolute",
+              top:"0px",
+              left:"0px",
+              width:"100%",
+              height:"auto",
+              "z-index":"10",
+            }
+          }
+          obj.styleObj.position="absolute"
+        }else{
+          obj.styleObj.position="static"
+        }
+        obj.cardId=obj.cardName+(bus.index++)
+      }
+    },
+    mounted:function () {
+      var the=this
+      bus.on("edit",function (el) {
+        the.selected3="";
+        the.editCardData=bus.editCardData
+        bus.editCardData=null
+        var id=the.editCardData.cardId
+        var po=$("#"+id).offset()
+        if(po){
+          $(".del").css({
+            top:(po.top+50)+"px"
+          })
+        }
+      })
+    },
+  })
+
+  var datastr=localStorage.getItem("curCardData")||"[]"
+  app.mainChild=JSON.parse(datastr).map(function (item) {
+    if(item.cssText){
+      item.isPendant=true;
+      item.styleObj={}
+      console.log(item.cssText)
+      item.cssText.replace(/([\w-]+):([\d\D]*?);/g,function (m,p1,p2) {
+        item.styleObj[p1]=p2;
+      })
+    }
+    return item
+  })
+
+  app.childrenList=[
+    {
+      "title":"运营卡片7种",
+      "children":[
+        {
+          "cardName":"card7"
+        },
+        {
+          "cardName":"card4"
+        },
+        {
+          "cardName":"card6"
+        },
+        {
+          "cardName":"card9"
+        },
+        {
+          "cardName":"card16"
+        },{
+          "cardName":"card19"
+        }, {
+          "cardName":"card22"
+        },{
+          "cardName":"card42"
+        }
+
+      ]
+    },
+    {
+      "title":"挂件卡片7种",
+      "children":[
+        {
+          "cardName":"card7",
+          "isPendant":true
+        },
+        {
+          "cardName":"card4",
+          "isPendant":true
+        },
+        {
+          "cardName":"card6",
+          "isPendant":true
+        },
+        {
+          "cardName":"card9",
+          "isPendant":true
+        },
+        {
+          "cardName":"card16",
+          "isPendant":true
+        },{
+          "cardName":"card19",
+          "isPendant":true
+        }, {
+          "cardName":"card22",
+          "isPendant":true
+        },{
+          "cardName":"card42",
+          "isPendant":true
+        }
+
+      ]
+    },
+    {
+      "title":"marvelAll48种",
+      "children":[
+        {
+          "cardName":"card2"
+        },
+        {
+          "cardName":"card3"
+        },
+        {
+          "cardName":"card4"
+        },
+        {
+          "cardName":"card6"
+        },
+        {
+          "cardName":"card7"
+        },
+        {
+          "cardName":"card9"
+        },
+        {
+          "cardName":"card11"
+        },
+        {
+          "cardName":"card16"
+        },
+        {
+          "cardName":"card17"
+        },
+        {
+          "cardName":"card19"
+        },
+        {
+          "cardName":"card21"
+        },
+        {
+          "cardName":"card22"
+        },
+        {
+          "cardName":"card23"
+        },
+        {
+          "cardName":"card24"
+        },
+        {
+          "cardName":"card25"
+        },
+        {
+          "cardName":"card26"
+        },
+        {
+          "cardName":"card27"
+        },
+        {
+          "cardName":"card28"
+        },
+        {
+          "cardName":"card29"
+        },
+        {
+          "cardName":"card30"
+        },
+        {
+          "cardName":"card31"
+        },
+        {
+          "cardName":"card32"
+        },
+        {
+          "cardName":"card35"
+        },
+        {
+          "cardName":"card36"
+        },
+        {
+          "cardName":"card38"
+        },
+        {
+          "cardName":"card39"
+        },
+        {
+          "cardName":"card40"
+        },
+        {
+          "cardName":"card41"
+        },
+        {
+          "cardName":"card42"
+        },
+        {
+          "cardName":"card43"
+        },
+        {
+          "cardName":"card50"
+        },
+        {
+          "cardName":"card52"
+        },
+        {
+          "cardName":"card53"
+        },
+        {
+          "cardName":"card54"
+        },
+        {
+          "cardName":"card55"
+        },
+        {
+          "cardName":"card57"
+        },
+        {
+          "cardName":"card58"
+        },
+        {
+          "cardName":"card59"
+        },
+        {
+          "cardName":"card77"
+        },
+        {
+          "cardName":"card82"
+        },
+        {
+          "cardName":"card83"
+        },
+        {
+          "cardName":"card83-85"
+        },
+        {
+          "cardName":"card84"
+        },
+        {
+          "cardName":"card86"
+        },
+        {
+          "cardName":"card87"
+        },
+        {
+          "cardName":"card88"
+        },
+        {
+          "cardName":"card93"
+        },
+        {
+          "cardName":"card2001"
+        }
+      ]
+    }
+
+  ].map(function (item) {
+    item.children.map(function (v) {
+      if(!v.cardId){
+        v.cardId=v.cardName+(bus.index++)
+      }
+      return v
+    })
+    return item
+  });
+
+//  $.getJSON("leftData.json",function (data) {
+//    app.childrenList=data.map(function (item) {
+//      item.children.map(function (v) {
+//        if(!v.cardId){
+//          v.cardId=v.cardName+(bus.index++)
+//        }
+//        return v
+//      })
+//      return item
+//    });
+//    console.log(app.childrenList)
+//  })
+
+</script>
+</html>
